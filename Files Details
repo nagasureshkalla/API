@@ -1,0 +1,10 @@
+
+app.py
+    -  Flux knot -- Took 1 hour 30 minutes to generate/Edit image
+app2.py 
+    -  warp-ai/wuerstchen -- Took 9 Seconds to only Generate image, no editing.
+app3.py
+    -  black-forest-labs/FLUX.2-klein-4B -- Took 10 Seconds to  Generate image and editing.
+
+app4.py
+    - going for video creation

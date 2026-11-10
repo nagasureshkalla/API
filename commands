@@ -1,0 +1,43 @@
+pip install virtualenv
+
+virtualenv venv
+
+windows > venv\Scripts\activate
+linux > source ./venv/bin/activate
+
+pip install Flask
+
+ pip install torch 
+
+ pip install git+https://github.com/huggingface/diffusers.git
+
+ pip install rembg
+
+ pip install onnxruntime
+
+ pip install transformers
+
+pip install gpustat
+ pip install accelerate,sentencepiece, accelerator
+
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu130
+
+ pip install \
+    transformers \
+    diffusers \
+    accelerate \
+    safetensors \
+    sentencepiece \
+    huggingface_hub \
+    peft \
+    xformers \
+    opencv-python \
+    pillow \
+    scipy \
+    ninja \
+    einops \
+    tqdm \
+    datasets
+
+
+    export CUDA_VISIBLE_DEVICES=1

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Edit</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            width: 1000px;
+            margin: auto; /* center horizontally */
+            text-align: center;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        button {
+            background: #45b3a4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #03bd76;
+        }
+
+        #response {
+            margin-top: 15px;
+            font-size: 14px;
+            color: green;
+        }
+        .scrollable {
+        overflow: auto;         /* Enables both horizontal and vertical scroll */
+    padding: 10px;
+overflow: scroll;
+
+    }
+
+    </style>
+</head>
+<body>
+<div  class="card scrollable">
+<div >
+    <h2> Image Edit </h2>
+
+    <input type="file" id="image" accept="image/*">
+
+    <textarea id="prompt" placeholder="Enter your prompt..."></textarea>
+
+    <button id="submitBtn">Submit</button>
+
+    <div id="response"></div>
+</div>
+<div>
+    <img id="generatedImage" src="" alt="Generated Image" style="margin-top:15px; max-width:100%;">
+</div>
+</div>
+
+
+
+
+</body>
+</html>
+<script>
+    $("#submitBtn").click(function () {
+
+        let imageFile = $("#image")[0].files[0];
+        let promptText = $("#prompt").val();
+
+        if (!promptText) {
+            alert("Please select an image and enter a prompt.");
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("image", imageFile);
+        formData.append("prompt", promptText);
+        $("#response").html('Generating Image ...')
+        $.ajax({
+            url: "/api/upload",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                $("#response").html("✅ " + response.message + " In "+response.time_taken);
+                $("#generatedImage").attr("src", "/" + response.output_image);
+            },
+            error: function () {
+                $("#response").html("❌ Error uploading data");
+            }
+        });
+    });
+</script>
